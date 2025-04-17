@@ -24,7 +24,7 @@ pip install pytest
 Run the application by providing a database file:
 
 ```bash
-python library.py books.txt
+python library.py <filename>
 ```
 
 If the file doesn't exist, it will be created automatically.
