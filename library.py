@@ -173,7 +173,7 @@ class Library:
 
                         # isbn doesn't have a valid [digit] value, ignore and continue
                         if not isbn.isdigit():
-                            log_msg = f"{self.filename}: Line {line_number} has an invalid (non-digit) ISBN-13: '{publishing_year}', ignoring"
+                            log_msg = f"{self.filename}: Line {line_number} has an invalid (non-digit) ISBN-13: '{isbn}', ignoring"
                             logger.warning(log_msg)
                             print(log_msg)
                             continue
@@ -226,6 +226,18 @@ class Library:
         Returns:
             None
         """
+        # Check if a book with the same ISBN already exists
+        for existing_book in self.books:
+            if existing_book.isbn == book.isbn:
+                print(
+                    f"ERROR: A book with ISBN-13 '{book.isbn}' already exists in the database: {existing_book}"
+                )
+                print(f"Operation cancelled: Book not added to database")
+                logger.warning(
+                    f"Attempted to add a duplicate book with an already existing ISBN-13 '{book.isbn}'"
+                )
+                return
+
         try:
             with open(self.filename, "a") as f:
                 f.write(f"{book.file_line_format()}\n")
