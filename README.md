@@ -34,7 +34,7 @@ If the file doesn't exist, it will be created automatically.
 The database is a simple [text] file with each book on a separate line in the following format:
 
 ```
-Title/Writer/ISBN-13/Publishing year
+Title/Writer/ISBN-13/Publishing-year
 ```
 
 ## Running Tests
