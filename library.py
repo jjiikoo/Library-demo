@@ -11,7 +11,7 @@ logging.basicConfig(
     format="{asctime} - {levelname} - {message}",
     datefmt="%Y-%m-%d %H:%M:%S",
     style="{",
-    level=logging.INFO,
+    level=logging.DEBUG,
 )
 logger = logging.getLogger(__name__)
 
@@ -461,8 +461,16 @@ def execute_menu_command(library: Library) -> None:
 def main():
     logger.debug("Application started")
     try:
-        parser = argparse.ArgumentParser(description="Library Database")
+        parser = argparse.ArgumentParser(description="Library Database Manager")
         parser.add_argument("filename", help="Database file for the book records")
+
+        if len(sys.argv) < 2:
+            error_msg = "No database file specified"
+            logger.warning(error_msg)
+            print(f"WARNING: {error_msg}")
+            parser.print_help()
+            return 1
+
         args = parser.parse_args()
 
         library = Library(args.filename)
