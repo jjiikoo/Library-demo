@@ -4,7 +4,6 @@
 
 - Python 3.10 or higher
 - Pytest (for running tests)
-- Other tools
 
 ### Installation
 
